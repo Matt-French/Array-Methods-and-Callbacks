@@ -58,18 +58,18 @@ Use the higher-order function getWinners to do the following:
 
 
 function getWinners(data2, cbfunc2) {
-    const winners = [];
-    const gameScores = cbfunc2(data2);
-        gameScores.map(function(item){
-          if(item.['Home Team Goals'] > item.['Away Team Goals']){
-            winners.push(item.['Home Team Name']);
-          }else{
-            winners.push(item.['Away Team Name']);
-          }
-        })
+    const winners = []; //empty array to store the winners
+    const gameScores = cbfunc2(data2); //set variable to callback function and data to receive
+             gameScores.map(function(item){ //focus the data we want look through to distinguise our winners
+                if(item.['Home Team Goals'] > item.['Away Team Goals']){ //initial comparison between team scores
+                   winners.push(item.['Home Team Name']);//push the name of the home team if they have more goals
+                }else{ //else statement used because there is a definitive winner, if first statement is false, there is only one other possibility
+                   winners.push(item.['Away Team Name']); //push the name of the away team if home team did not have more goals
+                }
+            })
         
-      return winners;
-    }
+    return winners; //return the result of our array
+}
 
 
 
@@ -83,8 +83,14 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(/* code here */) {
-    /* code here */
+function getWinnersByYear(data3, yearcb, winnercb){
+    const victorsByYear = [];
+    const finalsYear = yearcb(data3);
+    const victors = winnercb(data3);
+    for(let i = 0; i < victors.length; i++){
+        victorsByYear.push(`In ${finalsYear[i]}, ${victors[i]} won the world cup!`)
+    }
+    return victorsByYear;
 }
 
 
